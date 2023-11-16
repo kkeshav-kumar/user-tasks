@@ -9,6 +9,10 @@ import jakarta.persistence.Id
 data class Users(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
-    val username: String
+    var userId: Int? = null,
+    var username: String,
+    var role: String,
 )
+
+// TODO
+//    - Add a field assign task to show all the assigned task under that user

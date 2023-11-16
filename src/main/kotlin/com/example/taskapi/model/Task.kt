@@ -9,7 +9,9 @@ import jakarta.persistence.Id
 data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null,
+    var taskId: Int,
+    var heading: String,
     var description: String,
-    var assignedUserId: Long? = null
+    var priority: Int,
+    var assignedUsers : Int
 )
