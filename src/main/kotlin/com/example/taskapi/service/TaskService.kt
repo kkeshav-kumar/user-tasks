@@ -2,6 +2,7 @@ package com.example.taskapi.service
 
 import com.example.taskapi.dao.TaskRepository
 import com.example.taskapi.model.Task
+import com.example.taskapi.model.Users
 import org.springframework.stereotype.Service
 
 @Service
@@ -19,16 +20,16 @@ class TaskService(private val taskRepository: TaskRepository, private val userSe
         return taskRepository.save(task)
     }
 
-//    fun updateTask(taskId: Int,updateTask: Task):Task?{
-//        val existingTask = getTasksById(taskId)
-//        return if (existingTask!=null){
-//            existingTask.description = updateTask.description
-//            existingTask.assignedUserId = updateTask.assignedUserId
-//            taskRepository.save(existingTask)
-//        }else{
-//            null
-//        }
-//    }
+    fun updateTask(taskId: Int,updateTask: Task):Task?{
+        val existingTask = getTasksById(taskId)
+        return if (existingTask!=null){
+            existingTask.description = updateTask.description
+            existingTask.assignedUsers = updateTask.assignedUsers
+            taskRepository.save(existingTask)
+        }else{
+            null
+        }
+    }
     fun deleteTask(taskId: Int):Boolean{
         return if (taskRepository.existsById(taskId)){
             taskRepository.deleteById(taskId)
@@ -39,7 +40,14 @@ class TaskService(private val taskRepository: TaskRepository, private val userSe
         }
     }
 
-//    fun assignTask(taskId: Int,userId:Int): Task?{
-//
-//    }
+    fun assignTask(taskId: Int, assignedUsers: Int): Task? {
+        val task = getTasksById(taskId)
+        val user = userService.getUserById(assignedUsers)
+        return if (task != null && user != null) {
+            task.assignedUsers = assignedUsers
+            taskRepository.save(task)
+        } else {
+            null
+        }
+    }
 }

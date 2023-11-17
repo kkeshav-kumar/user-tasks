@@ -3,7 +3,6 @@ package com.example.taskapi.controller
 import com.example.taskapi.model.Users
 import com.example.taskapi.service.UserService
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -16,38 +15,24 @@ class UserController(private val userService: UserService) {
     }
 
     @GetMapping("/{userId}")
-    fun getUserById(@PathVariable userId: Int): ResponseEntity<Users> {
-        val user = userService.getUserById(userId)
-        return if (user != null) {
-            ResponseEntity.ok(user)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+    fun getUserById(@PathVariable userId: Int): Users? {
+        return userService.getUserById(userId)
     }
 
     @PostMapping
-    fun addUser(@RequestBody user: Users): ResponseEntity<Users> {
-        val createdUser = userService.addUser(user)
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser)
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addUser(@RequestBody user: Users): Users {
+        return userService.addUser(user)
     }
 
     @PutMapping("/{userId}")
-    fun updateUser(@PathVariable userId: Int, @RequestBody updatedUser: Users): ResponseEntity<Users> {
-        val user = userService.updateUser(userId, updatedUser)
-        return if (user != null) {
-            ResponseEntity.ok(user)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+    fun updateUser(@PathVariable userId: Int, @RequestBody updatedUser: Users): Users? {
+        return userService.updateUser(userId, updatedUser)
     }
 
     @DeleteMapping("/{userId}")
-    fun deleteUser(@PathVariable userId: Int): ResponseEntity<Void> {
-        val success = userService.deleteUser(userId)
-        return if (success) {
-            ResponseEntity.noContent().build()
-        } else {
-            ResponseEntity.notFound().build()
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteUser(@PathVariable userId: Int) {
+        userService.deleteUser(userId)
     }
 }

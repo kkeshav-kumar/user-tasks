@@ -2,8 +2,6 @@ package com.example.taskapi.controller
 
 import com.example.taskapi.model.Task
 import com.example.taskapi.service.TaskService
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -28,25 +26,22 @@ class TaskController(private val taskService: TaskService) {
     }
 
     @PostMapping
-//    fun addTask(@RequestBody task: Task):Task{
-//        return taskService.addTask(task)
-//    }
-
-    fun addTask(@RequestBody task: Task): ResponseEntity<Task> {
-        val createdTask = taskService.addTask(task)
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTask)
+    fun addTask(@RequestBody task: Task):Task{
+        return taskService.addTask(task)
     }
 
-//    @PutMapping("/{taskId}")
-//    fun updateTask(@PathVariable taskId: Int, @RequestBody updateTask: Task):Task?{
-//        return taskService.updateTask(taskId, updateTask)
-//    }
+    @PutMapping("/{taskId}")
+    fun updateTask(@PathVariable taskId: Int, @RequestBody updateTask: Task):Task?{
+        return taskService.updateTask(taskId, updateTask)
+    }
 
     @DeleteMapping("/{taskId}")
     fun deleteTask(@PathVariable taskId:Int): Boolean{
         return taskService.deleteTask(taskId)
     }
 
-//    @PostMapping("/{taskId}/assign/{usedId}")
-//    fun assignTask(@PathVariable)
+    @PostMapping("/{taskId}/assign/{userId}")
+    fun assignTask(@PathVariable taskId: Int, @PathVariable assignedUsers: Int): Task? {
+        return taskService.assignTask(taskId, assignedUsers)
+    }
 }
