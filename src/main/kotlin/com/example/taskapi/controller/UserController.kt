@@ -31,7 +31,8 @@ class UserController(private val userService: UserService) {
     }
 
     @DeleteMapping("/{userId}")
-    fun deleteUser(@PathVariable userId: Int) :Boolean{
-        return userService.deleteUser(userId)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteUser(@PathVariable userId: Int) {
+        userService.deleteUser(userId)
     }
 }
