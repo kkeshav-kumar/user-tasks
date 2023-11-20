@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-data class Users(
+data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var userId: Int? = null,

@@ -1,25 +1,25 @@
 package com.example.taskapi.service
 
 import com.example.taskapi.dao.UserRepository
-import com.example.taskapi.model.Users
+import com.example.taskapi.model.User
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(private val userRepository: UserRepository) {
 
-    fun getAllUsers(): List<Users> {
+    fun getAllUsers(): List<User> {
         return userRepository.findAll()
     }
 
-    fun getUserById(userId: Int): Users? {
+    fun getUserById(userId: Int): User? {
         return userRepository.findById(userId).orElse(null)
     }
 
-    fun addUser(user: Users): Users {
+    fun addUser(user: User): User {
         return userRepository.save(user)
     }
 
-    fun updateUser(userId: Int, updatedUser: Users): Users? {
+    fun updateUser(userId: Int, updatedUser: User): User? {
         val existingUser = getUserById(userId)
         return if (existingUser != null) {
             existingUser.username = updatedUser.username

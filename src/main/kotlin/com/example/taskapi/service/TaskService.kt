@@ -2,7 +2,6 @@ package com.example.taskapi.service
 
 import com.example.taskapi.dao.TaskRepository
 import com.example.taskapi.model.Task
-import com.example.taskapi.model.Users
 import org.springframework.stereotype.Service
 
 @Service
