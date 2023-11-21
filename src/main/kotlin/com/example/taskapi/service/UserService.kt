@@ -19,15 +19,44 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.save(user)
     }
 
+//    fun updateUser(userId: Int, updatedUser: Users): Users? {
+//        val existingUser = getUserById(userId)
+//        return if (existingUser != null) {
+//            existingUser.username = updatedUser.username
+//            userRepository.save(existingUser)
+//        } else {
+//            null
+//        }
+//    }
+
     fun updateUser(userId: Int, updatedUser: Users): Users? {
-        val existingUser = getUserById(userId)
-        return if (existingUser != null) {
-            existingUser.username = updatedUser.username
-            userRepository.save(existingUser)
-        } else {
-            null
+        val existingUser = userRepository.findById(userId)
+        if (existingUser.isPresent) {
+            val userToUpdate = existingUser.get()
+            userToUpdate.apply {
+                username = updatedUser.username
+                role = updatedUser.role
+                // Add other properties you want to update
+            }
+            return userRepository.save(userToUpdate)
         }
+        return null // User not found
     }
+
+    fun partialUpdateUser(userId: Int, updatedUser: Users): Users? {
+        val existingUser = userRepository.findById(userId)
+        if (existingUser.isPresent) {
+            val userToUpdate = existingUser.get()
+            userToUpdate.apply {
+                username = updatedUser.username ?: username
+                role = updatedUser.role ?: role
+                // Add other properties you want to partially update
+            }
+            return userRepository.save(userToUpdate)
+        }
+        return null // User not found
+    }
+
 
     fun deleteUser(userId: Int): Boolean {
         return if (userRepository.existsById(userId)) {
