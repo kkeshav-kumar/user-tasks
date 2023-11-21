@@ -1,9 +1,6 @@
 package com.example.taskapi.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 data class Task(
@@ -14,4 +11,8 @@ data class Task(
     var description: String,
     var priority: Int,
     var assignedUsers : Int
+
+//    @ManyToOne
+//    @JoinColumn(name = "assigned_user_id")
+//    val assignedUser: Users? = null
 )
