@@ -36,11 +36,10 @@ class UserService(private val userRepository: UserRepository) {
             userToUpdate.apply {
                 username = updatedUser.username
                 role = updatedUser.role
-                // Add other properties you want to update
             }
             return userRepository.save(userToUpdate)
         }
-        return null // User not found
+        return null
     }
 
     fun partialUpdateUser(userId: Int, updatedUser: Users): Users? {
@@ -50,11 +49,10 @@ class UserService(private val userRepository: UserRepository) {
             userToUpdate.apply {
                 username = updatedUser.username ?: username
                 role = updatedUser.role ?: role
-                // Add other properties you want to partially update
             }
             return userRepository.save(userToUpdate)
         }
-        return null // User not found
+        return null
     }
 
 

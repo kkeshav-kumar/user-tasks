@@ -39,11 +39,10 @@ class TaskService(private val taskRepository: TaskRepository, private val userSe
                 description = updatedTask.description
                 priority = updatedTask.priority
                 assignedUsers = updatedTask.assignedUsers
-                // Add other properties you want to update
             }
             return taskRepository.save(taskToUpdate)
         }
-        return null // Task not found
+        return null
     }
 
     fun partialUpdateTask(taskId: Int, updatedTask: Task): Task? {
@@ -55,11 +54,10 @@ class TaskService(private val taskRepository: TaskRepository, private val userSe
                 description = updatedTask.description ?: description
                 priority = updatedTask.priority ?: priority
                 assignedUsers = updatedTask.assignedUsers ?: assignedUsers
-                // Add other properties you want to partially update
             }
             return taskRepository.save(taskToUpdate)
         }
-        return null // Task not found
+        return null
     }
 
     fun deleteTask(taskId: Int):Boolean{
