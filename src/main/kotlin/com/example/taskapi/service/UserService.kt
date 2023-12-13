@@ -19,16 +19,6 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.save(user)
     }
 
-//    fun updateUser(userId: Int, updatedUser: Users): Users? {
-//        val existingUser = getUserById(userId)
-//        return if (existingUser != null) {
-//            existingUser.username = updatedUser.username
-//            userRepository.save(existingUser)
-//        } else {
-//            null
-//        }
-//    }
-
     fun updateUser(userId: Int, updatedUser: Users): Users? {
         val existingUser = userRepository.findById(userId)
         if (existingUser.isPresent) {

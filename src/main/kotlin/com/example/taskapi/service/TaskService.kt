@@ -19,17 +19,6 @@ class TaskService(private val taskRepository: TaskRepository, private val userSe
         return taskRepository.save(task)
     }
 
-//    fun updateTask(taskId: Int,updateTask: Task):Task?{
-//        val existingTask = getTasksById(taskId)
-//        return if (existingTask!=null){
-//            existingTask.description = updateTask.description
-//            existingTask.assignedUsers = updateTask.assignedUsers
-//            taskRepository.save(existingTask)
-//        }else{
-//            null
-//        }
-//    }
-
     fun updateTask(taskId: Int, updatedTask: Task): Task? {
         val existingTask = taskRepository.findById(taskId)
         if (existingTask.isPresent) {

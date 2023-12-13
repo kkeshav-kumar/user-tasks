@@ -24,11 +24,6 @@ class TaskController(private val taskService: TaskService) {
         return taskService.addTask(task)
     }
 
-//    @PutMapping("/{taskId}")
-//    fun updateTask(@PathVariable taskId: Int, @RequestBody updateTask: Task):Task?{
-//        return taskService.updateTask(taskId, updateTask)
-//    }
-
     @PutMapping("/{taskId}")
     fun updateTask(@PathVariable taskId: Int, @RequestBody updatedTask: Task): Task? {
         return taskService.updateTask(taskId, updatedTask)

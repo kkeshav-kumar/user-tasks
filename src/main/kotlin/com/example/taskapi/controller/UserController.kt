@@ -19,17 +19,6 @@ class UserController(private val userService: UserService) {
         return userService.getUserById(userId)
     }
 
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    fun addUser(@RequestBody user: Users): Users {
-//        return userService.addUser(user)
-//    }
-//
-//    @PutMapping("/{userId}")
-//    fun updateUser(@PathVariable userId: Int, @RequestBody updatedUser: Users): Users? {
-//        return userService.updateUser(userId, updatedUser)
-//    }
-
     @PutMapping("/{userId}")
     fun updateUser(@PathVariable userId: Int, @RequestBody updatedUser: Users): Users? {
         return userService.updateUser(userId, updatedUser)
@@ -44,8 +33,4 @@ class UserController(private val userService: UserService) {
     fun deleteUser(@PathVariable userId: Int):Boolean {
         return userService.deleteUser(userId)
     }
-
-//    fun deleteUser(@PathVariable userId: Int){
-//        userService.deleteUser(userId)
-//    }
 }
